@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stylish Light/Dark Mode Toggle</title>
+    <style>
+      /* styles.css */
+      body {
+        margin: 0;
+        padding: 0;
+        transition: background-color 0.4s ease, color 0.4s ease;
+        background-color: #ffffff;
+        color: #333333;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body.dark {
+        background-color: #1a1a1a;
+        color: #f0f0f0;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 100px auto;
+        text-align: center;
+        padding: 40px;
+        border-radius: 16px;
+        background-color: #f9f9f9;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        transition: background-color 0.4s ease;
+      }
+
+      body.dark .container {
+        background-color: #2b2b2b;
+      }
+
+      .toggle {
+        margin-top: 20px;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #ffffff;
+        font-size: 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: background-color 0.4s, transform 0.2s;
+        box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+      }
+
+      .toggle:hover {
+        transform: translateY(-3px);
+      }
+
+      body.dark .toggle {
+        background-color: #f5f5f5;
+        color: #333333;
+        box-shadow: 0 8px 20px rgba(245, 245, 245, 0.3);
+      }
+
+      .icon {
+        font-size: 24px;
+        transition: transform 0.4s ease;
+      }
+
+      body.dark .icon {
+        transform: rotate(180deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome, Ireski!</h1>
+      <p>Experience the power of light and dark mode!</p>
+      <button id="theme-toggle" class="toggle">
+        <span class="icon">☀️</span>
+        <span class="label">Light Mode</span>
+      </button>
+    </div>
+    <script>
+      // script.js
+      document.addEventListener("DOMContentLoaded", () => {
+        const body = document.body;
+        const toggleButton = document.getElementById("theme-toggle");
+        const icon = toggleButton.querySelector(".icon");
+        const label = toggleButton.querySelector(".label");
+
+        // Load saved theme from localStorage
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+          body.classList.add("dark");
+          icon.textContent = "🌙";
+          label.textContent = "Dark Mode";
+        }
+
+        toggleButton.addEventListener("click", () => {
+          const isDark = body.classList.toggle("dark");
+          icon.textContent = isDark ? "🌙" : "☀️";
+          label.textContent = isDark ? "Dark Mode" : "Light Mode";
+          localStorage.setItem("theme", isDark ? "dark" : "light");
+        });
+      });
+    </script>
+  </body>
+</html>

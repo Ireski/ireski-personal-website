@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="#" class="contact-box-right" onsubmit="sendToWhatsApp(event)">
+      <input
+        type="text"
+        name="fullname"
+        id="name"
+        placeholder="YOUR NAME"
+        required
+      />
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="YOUR EMAIL"
+        required
+      />
+      <input
+        type="text"
+        name="subject"
+        id="subject"
+        placeholder="YOUR SUBJECT"
+        required
+      /><br />
+      <textarea
+        name="message"
+        id="message"
+        placeholder="YOUR MESSAGE"
+        required
+      ></textarea
+      ><br />
+      <a href="" type="submit">Submit</a>
+    </form>
+
+    <script>
+      function sendToWhatsApp(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+        const subject = document.getElementById("subject").value;
+
+        const phoneNumber = "2349068351922"; // Replace with your WhatsApp number (include country code, no "+")
+        const textMessage = `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`;
+
+        const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+          textMessage
+        )}`;
+        window.open(whatsappURL, "_blank");
+      }
+    </script>
+  </body>
+</html>

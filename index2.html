@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="progress1" class="progress" data-percentage="48"></div>
+    <p id="text-percentage1" class="percentage">0%</p>
+
+    <div id="progress2" class="progress" data-percentage="98"></div>
+    <p id="text-percentage2" class="percentage">0%</p>
+
+    <script>
+      // Array of progress elements, with target percentages
+      const progressElements = [
+        { id: "progress1", textId: "text-percentage1", percentage: 48 },
+        { id: "progress2", textId: "text-percentage2", percentage: 98 },
+      ];
+
+      // Function to set progress dynamically
+      function setProgress(element) {
+        const circle = document.querySelector(`#${element.id}`);
+        const text = document.querySelector(`#${element.textId}`);
+        const targetPercentage = element.percentage;
+        let currentPercentage = 0;
+
+        // Set initial stroke dash offset for the progress circle
+        circle.style.strokeDashoffset = 0;
+
+        // Use setInterval to animate the progress
+        const interval = setInterval(() => {
+          if (currentPercentage < targetPercentage) {
+            currentPercentage++;
+            const offset = 100 - currentPercentage;
+            circle.style.strokeDashoffset = offset;
+            text.textContent = `${currentPercentage}%`;
+          } else {
+            clearInterval(interval); // Stop the interval once the target is reached
+          }
+        }, 20); // Adjust the speed of counting (20ms interval)
+      }
+
+      // Using map to update all progress elements
+      progressElements.map(setProgress);
+    </script>
+  </body>
+</html>

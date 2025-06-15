@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scroll Active Menu</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        margin: 0;
+        scroll-behavior: smooth;
+      }
+      nav {
+        position: fixed;
+        top: 50%;
+        left: 91%;
+        width: 20%;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 2px;
+        padding: 0;
+        z-index: 999;
+      }
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        padding: 0;
+        transition: color 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        margin: 10px 0;
+      }
+      nav a span {
+        position: absolute;
+        left: 40%;
+      }
+      nav a i {
+        position: relative;
+        left: 40%;
+        padding: 5px;
+        border-radius: 50%;
+      }
+      i.active {
+        color: #ffb400;
+        font-weight: 600;
+      }
+      section {
+        height: 100vh;
+        padding: 100px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2em;
+        color: #fff;
+      }
+      #home {
+        background-color: #f76c6c;
+      }
+      #about {
+        background-color: #6c7ae0;
+      }
+      #services {
+        background-color: #34bfa3;
+      }
+      #contact {
+        background-color: #f7b32b;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="#home"><span>Home</span><i class="bx bxs-home"></i></a>
+      <a href="#about"><span>Home</span><i class="bx bxs-home"></i></a>
+      <a href="#services"><span>Home</span><i class="bx bxs-home"></i></a>
+      <a href="#contact"><span>Home</span><i class="bx bxs-home"></i></a>
+    </nav>
+
+    <section id="home">Home Section</section>
+    <section id="about">About Section</section>
+    <section id="services">Services Section</section>
+    <section id="contact">Contact Section</section>
+
+    <script>
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll("nav a");
+
+      window.addEventListener("scroll", () => {
+        let current = "";
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (pageYOffset >= sectionTop - sectionHeight / 3) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${current}`) {
+            link.classList.add("active");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
